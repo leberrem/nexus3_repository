@@ -54,9 +54,7 @@ nexus_delete_default_blobstore: false
 #
 # Nexus blobstore config
 nexus_blob_split: true     # True - blobstores per format
-nexus_blob_names:           # Splited blob name list @ blob_vars.yml
-  sabhd:
-    blob: 'default'
+nexus_blob_names: []          # Splited blob name list @ blob_vars.yml
 
 nexus_blobstores: []
 # example blobstore item :
