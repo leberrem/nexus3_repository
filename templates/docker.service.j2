@@ -1,13 +1,13 @@
 [Unit]
-Description=Docker {{ container }} Service
+Description=Docker {{ nexus3_repository_container_name }} Service
 Requires=docker.service
 After=docker.service
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/docker start {{ container }}
-ExecStop=/usr/bin/docker stop {{ container }}
+ExecStart=/usr/bin/docker start {{ nexus3_repository_container_name }}
+ExecStop=/usr/bin/docker stop {{ nexus3_repository_container_name }}
 TimeoutStartSec=0
 
 [Install]

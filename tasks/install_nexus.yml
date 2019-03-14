@@ -1,14 +1,14 @@
 ---
 - name: Create NEXUS Data directory
   file:
-    path: "{{ nexus_data }}"
+    path: "{{ nexus3_repository_data_directory }}"
     state: directory
     mode: 0755
     owner: 200
 
 - name: Create NEXUS plugin directory
   file:
-    path: "{{ nexus_plugin }}"
+    path: "{{ nexus3_repository_plugin_directory }}"
     state: directory
     mode: 0755
     owner: 200
@@ -16,18 +16,18 @@
 - name: upload HELM plugin
   copy:
     src: "files/nexus-repository-helm-0.0.7.jar"
-    dest: "{{ nexus_plugin }}/nexus-repository-helm-0.0.7.jar"
+    dest: "{{ nexus3_repository_plugin_directory }}/nexus-repository-helm-0.0.7.jar"
     owner: 200
   when: install_helm_plugin | default(true) | bool
 
 - name: Create NEXUS container
   docker_container:
     image: "{{ docker_image }}"
-    name: "{{ container }}"
+    name: "{{ nexus3_repository_container_name }}"
     state: started
     volumes:
-      - "{{ nexus_data }}:/nexus-data"
-      - "{{ nexus_plugin }}:/opt/sonatype/nexus/deploy"
+      - "{{ nexus3_repository_data_directory }}:/nexus-data"
+      - "{{ nexus3_repository_plugin_directory }}:/opt/sonatype/nexus/deploy"
     published_ports:
       - "5000:5000"
       - "8081:8081"
@@ -35,12 +35,12 @@
 - name: Create service file
   template:
     src: "templates/docker.service.j2"
-    dest: "/lib/systemd/system/{{ container_name }}.service"
+    dest: "/lib/systemd/system/{{ nexus3_repository_container_name }}.service"
     mode: 644
   notify:
-  - reload systemctl
+    - reload systemctl
 
 - name: Enable service
   service:
-      name: "{{ container_name }}"
+      name: "{{ nexus3_repository_container_name }}"
       enabled: yes
