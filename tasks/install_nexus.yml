@@ -1,0 +1,41 @@
+---
+    - name: Create NEXUS Data directory
+      file:
+        path: "{{ nexus_data }}"
+        state: directory
+        mode: 0755
+        owner: 200
+      
+    - name: Create NEXUS plugin directory
+      file:
+        path: "{{ nexus_plugin }}"
+        state: directory
+        mode: 0755
+        owner: 200
+
+    - name: upload HELM plugin
+      copy:
+        src: "files/nexus-repository-helm-0.0.7.jar"
+        dest: "{{ nexus_plugin }}/nexus-repository-helm-0.0.7.jar"
+        owner: 200
+      when: install_helm_plugin | default(true) | bool
+
+    - name: Remove old container
+      shell: docker rm {{ container_name }}
+      ignore_errors: True
+
+    - name: Create NEXUS container
+      shell: "docker run -d -p 8081:8081 -p 5000:5000 --name {{ container }} -v {{ nexus_data }}:/nexus-data -v {{ nexus_plugin }}:/opt/sonatype/nexus/deploy {{ docker_image }}"
+
+    - name: Create service file
+      template:
+        src: "templates/docker.service.j2"
+        dest: "/lib/systemd/system/{{ container_name }}.service"
+        mode: 644
+      notify:
+      - reload systemctl
+
+    - name: Enable service
+      service:
+          name: "{{ container_name }}"
+          enabled: yes

@@ -1,0 +1,7 @@
+---
+    nexus_data: "/var/nexus/data"
+    nexus_plugin: "/var/nexus/plugins"
+    container_name: "nexus"
+    docker_image: sonatype/nexus3:lastest
+    install_helm_plugin: true
+    install_nexus: true

@@ -1,0 +1,7 @@
+---
+  - block:
+
+      - name: Install nexus
+        include_tasks: install_nexus.yml
+
+    when: install_nexus | default(true) | bool
