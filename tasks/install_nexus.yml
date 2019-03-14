@@ -22,7 +22,7 @@
 
 - name: Create NEXUS container
   docker_container:
-    image: "{{ docker_image }}"
+    image: "{{ nexus3_repository_container_image }}"
     name: "{{ nexus3_repository_container_name }}"
     state: started
     volumes:
