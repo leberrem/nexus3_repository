@@ -1,14 +1,9 @@
 ---
-  - block:
+- name: Install nexus
+  include_tasks: install_nexus.yml
+  when: nexus3_repository_install_nexus
 
-      - name: Install nexus
-        include_tasks: install_nexus.yml
 
-    when: nexus3_repository_install_nexus | default(true) | bool
-
-  # - block:
-
-  #     - name: Configure nexus
-  #       include_tasks: config_nexus.yml
-
-  #   when: nexus3_repository_config_nexus | default(true) | bool    
+- name: Configure nexus
+  include_tasks: config_nexus.yml
+  when: nexus3_repository_config_nexus
