@@ -55,5 +55,5 @@
 
 - name: Enable service
   service:
-      name: "{{ nexus3_repository_container_name }}"
-      enabled: yes
+    name: "{{ nexus3_repository_container_name }}"
+    enabled: yes
