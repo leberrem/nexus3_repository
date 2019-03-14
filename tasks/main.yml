@@ -3,6 +3,13 @@
   include_tasks: install_nexus.yml
   when: nexus3_repository_install_nexus
 
+- name: Wait for Nexus to be up
+  uri:
+    url: http://localhost:{{ nexus_default_port }}/service/rest/v1/status
+  register: nexus_status
+  until: nexus_status.status == 200
+  retries: 6
+  delay: 10
 
 - name: Configure nexus
   include_tasks: config_nexus.yml
