@@ -389,3 +389,5 @@ _nexus_repos_pypi_defaults:
   negative_cache_ttl: 1440  # Nexus gui default. For proxies only
 nexus_repos_pypi_defaults:
   blob_store: "default"
+
+nexus_repos_pypi_proxy: []
