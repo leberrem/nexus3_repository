@@ -38,7 +38,7 @@
     image: "{{ nexus3_repository_container_image }}"
     name: "{{ nexus3_repository_container_name }}"
     state: started
-    recreate: yes    
+    recreate: "{{ nexus3_repository_container_recreate | default(true) }}"
     volumes:
       - "{{ nexus3_repository_data_directory }}:/nexus-data"
       - "{{ nexus3_repository_plugin_directory }}:/opt/sonatype/nexus/deploy"
