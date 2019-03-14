@@ -10,6 +10,7 @@
 - name: Install docker python package
   pip:
     name: docker
+    state: latest
 
 - name: Create NEXUS Data directory
   file:
