@@ -1,0 +1,56 @@
+---
+# tasks file for configure-nexus
+
+- include: declare_script_each.yml
+  with_items:
+    - setup_anonymous_access
+    - delete_blobstore
+    - create_blobstores_from_list
+    - create_repos_from_list
+    - setup_realms
+
+- name: Create/Check blobstores
+  when: nexus_restore_point is undefined
+  block:
+
+    - name: Create directories for blob stores.
+      file:
+        path: "{{ item['path'] }}"
+        owner: "{{ nexus_os_user }}"
+        group: "{{ nexus_os_group }}"
+        state: directory
+        recurse: true
+      when: item.path is defined
+      loop: "{{ nexus_blobstores }}"
+
+    - name: Create/Check blobstores
+      include_tasks: call_script.yml
+      vars:
+        script_name: create_blobstores_from_list
+        args: "{{ nexus_blobstores }}"
+      when: nexus_blobstores | length > 0
+
+- name: Apply defaults to repositories configurations and process a single list
+  include_tasks: process_repos_list.yml
+
+- name: Create configured repositories
+  include_tasks: call_script.yml
+  vars:
+    script_name: create_repos_from_list
+    args: "{{ _nexus_repos_global_list }}"
+
+- block:
+  - include_tasks: call_script.yml
+    vars:
+      script_name: setup_anonymous_access
+      args:
+        anonymous_access: "{{ nexus_anonymous_access }}"
+  when: is_nexus_anonymous_access  | default(true) | bool
+
+- block:
+  - include_tasks: call_script.yml
+    vars:
+      script_name: setup_realms
+      args:
+        docker_bearer_token_realm: "{{ nexus_docker_bearer_token_realm }}"
+  when: nexus_config_docker | default(true) | bool
