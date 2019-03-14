@@ -391,3 +391,5 @@ nexus_repos_pypi_defaults:
   blob_store: "default"
 
 nexus_repos_pypi_proxy: []
+nexus_repos_pypi_hosted: []
+nexus_repos_pypi_group: []
