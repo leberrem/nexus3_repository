@@ -1,4 +1,16 @@
 ---
+- name: Install epel-release
+  yum:
+    name: epel-release
+
+- name: Install python-pip
+  yum:
+    name: python-pip
+
+- name: Install docker python package
+  pip:
+    name: docker
+
 - name: Create NEXUS Data directory
   file:
     path: "{{ nexus3_repository_data_directory }}"
@@ -25,6 +37,7 @@
     image: "{{ nexus3_repository_container_image }}"
     name: "{{ nexus3_repository_container_name }}"
     state: started
+    recreate: yes    
     volumes:
       - "{{ nexus3_repository_data_directory }}:/nexus-data"
       - "{{ nexus3_repository_plugin_directory }}:/opt/sonatype/nexus/deploy"

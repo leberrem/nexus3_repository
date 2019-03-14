@@ -12,12 +12,12 @@ Role Variables
 --------------
 
 ```yaml
-    nexus_data: "/var/nexus/data"
-    nexus_plugin: "/var/nexus/plugins"
-    container_name: "nexus"
-    docker_image: sonatype/nexus3:lastest
-    install_helm_plugin: true
-    install_nexus: true
+    nexus3_repository_data_directory: "/var/nexus/data"
+    nexus3_repository_plugin_directory: "/var/nexus/plugins"
+    nexus3_repository_container_name: "nexus"
+    nexus3_repository_container_image: "sonatype/nexus3:latest"
+    nexus3_repository_install_helm_plugin: true
+    nexus3_repository_install_nexus: true
 ```
 
 Dependencies
@@ -36,12 +36,12 @@ Example Playbook
       include_role:
         name: nexus3_repository
       vars:
-        nexus_data: "/var/nexus/data"
-        nexus_plugin: "/var/nexus/plugins"
-        container_name: "nexus"
-        docker_image: sonatype/nexus3:lastest
-        install_helm_plugin: true
-        install_nexus: true
+        nexus3_repository_data_directory: "/var/nexus/data"
+        nexus3_repository_plugin_directory: "/var/nexus/plugins"
+        nexus3_repository_container_name: "nexus"
+        nexus3_repository_container_image: "sonatype/nexus3:latest"
+        nexus3_repository_install_helm_plugin: true
+        nexus3_repository_install_nexus: true
 
 ```
 
