@@ -1,9 +1,1 @@
 ---
-nexus_blob_prefix: 'blob-'  # Note: Nexus restore - blob name-convention 'blob-*'
-nexus_blob_names:
-  sabhd:
-    blob: '{{ nexus_blob_prefix }}sabhd'
-
-nexus_blobstores:
-  - name: '{{ nexus_blob_prefix }}sabhd'
-    path: "{{ nexus_container_data_dir }}/blobs/{{ nexus_blob_names.sabhd.blob }}"
