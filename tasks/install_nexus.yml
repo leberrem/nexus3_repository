@@ -17,20 +17,24 @@
     path: "{{ nexus3_repository_data_directory }}"
     state: directory
     mode: 0755
-    owner: 200
+    owner: "{{ nexus_os_user }}"
+    group: "{{ nexus_os_group }}"
 
 - name: Create NEXUS plugin directory
   file:
     path: "{{ nexus3_repository_plugin_directory }}"
     state: directory
     mode: 0755
-    owner: 200
+    owner: "{{ nexus_os_user }}"
+    group: "{{ nexus_os_group }}"
 
 - name: upload HELM plugin
   copy:
     src: "files/nexus-repository-helm-0.0.7.jar"
     dest: "{{ nexus3_repository_plugin_directory }}/nexus-repository-helm-0.0.7.jar"
-    owner: 200
+    owner: "{{ nexus_os_user }}"
+    group: "{{ nexus_os_group }}"
+
   when: install_helm_plugin | default(true) | bool
 
 - name: Create NEXUS container
@@ -43,8 +47,10 @@
       - "{{ nexus3_repository_data_directory }}:/nexus-data"
       - "{{ nexus3_repository_plugin_directory }}:/opt/sonatype/nexus/deploy"
     published_ports:
-      - "5000:5000"
-      - "8081:8081"
+      - "{{ nexus_docker_proxy_port }}:{{ nexus_docker_proxy_port }}"
+      - "{{ nexus_docker_hosted_port }}:{{ nexus_docker_hosted_port }}"
+      - "{{ nexus_docker_group_port }}:{{ nexus_docker_group_port }}"
+      - "{{ nexus_default_port }}:8081"
 
 - name: Create service file
   template:

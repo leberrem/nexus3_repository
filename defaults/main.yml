@@ -10,10 +10,6 @@ nexus3_repository_config_nexus: true
 
 nexus_os_group: '200'
 nexus_os_user: '200'
-nexus_os_user_home_dir: '/home/centos'
-nexus_data_dir: '/var/nexus/data'
-nexus_container_data_dir: '/nexus-data'
-nexus_tmp_dir: '/tmp/nexus'
 current_nexus_admin_user: 'admin'
 current_nexus_admin_password: 'admin123'
 
