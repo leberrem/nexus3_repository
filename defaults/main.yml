@@ -8,7 +8,6 @@ nexus3_repository_install_helm_plugin: true
 nexus3_repository_install_nexus: true
 nexus3_repository_config_nexus: true
 
-nexus_os_group: '200'
 nexus_os_user: '200'
 current_nexus_admin_user: 'admin'
 current_nexus_admin_password: 'admin123'

@@ -18,7 +18,6 @@
     state: directory
     mode: 0755
     owner: "{{ nexus_os_user }}"
-    group: "{{ nexus_os_group }}"
 
 - name: Create NEXUS plugin directory
   file:
@@ -26,14 +25,12 @@
     state: directory
     mode: 0755
     owner: "{{ nexus_os_user }}"
-    group: "{{ nexus_os_group }}"
 
 - name: upload HELM plugin
   copy:
     src: "files/nexus-repository-helm-0.0.7.jar"
     dest: "{{ nexus3_repository_plugin_directory }}/nexus-repository-helm-0.0.7.jar"
     owner: "{{ nexus_os_user }}"
-    group: "{{ nexus_os_group }}"
 
   when: install_helm_plugin | default(true) | bool
 
