@@ -48,9 +48,9 @@ Example Playbook
 License
 -------
 
-...
+GPLv3
 
 Author Information
 ------------------
 
-WeScale
+Mikaël LE BERRE
