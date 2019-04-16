@@ -36,17 +36,6 @@ nexus_nuget_api_key_realm: false
 nexus_npm_bearer_token_realm: false
 nexus_rut_auth_realm: false
 
-# nexus repository
-nexus_config_pypi: false
-nexus_config_docker: false
-nexus_config_yum: false
-nexus_config_raw: false
-nexus_config_rubygems: false
-nexus_config_bower: false
-nexus_config_npm: false
-nexus_config_nuget: false
-nexus_config_helm: false
-
 # Nexus blobstore config
 nexus_delete_default_blobstore: false
 nexus_blob_split: true     # True - blobstores per format
@@ -72,6 +61,8 @@ _nexus_privilege_defaults:
   format: maven2
   actions:
     - read
+
+nexus_config_maven: false
 
 _nexus_repos_maven_defaults:
   blob_store: "default"
@@ -127,6 +118,8 @@ nexus_repos_maven_group: []
 # RAW
 # ===================================
 
+nexus_config_raw: false
+
 _nexus_repos_raw_defaults:
   blob_store: "default"
   strict_content_validation: true
@@ -164,6 +157,8 @@ nexus_repos_raw_group: []
 # ===================================
 # DOCKER
 # ===================================
+
+nexus_config_docker: false
 
 _nexus_repos_docker_defaults:
   blob_store: "default"
@@ -209,6 +204,8 @@ nexus_repos_docker_group: []
 # RUBYGEMS
 # ===================================
 
+nexus_config_rubygems: false
+
 _nexus_repos_rubygems_defaults:
   blob_store: "default"
   strict_content_validation: true
@@ -244,6 +241,8 @@ nexus_repos_rubygems_group: []
 # ===================================
 # BOWER
 # ===================================
+
+nexus_config_bower: false
 
 _nexus_repos_bower_defaults:
   blob_store: "default"
@@ -281,6 +280,8 @@ nexus_repos_bower_group: []
 # NPM
 # ===================================
 
+nexus_config_npm: false
+
 _nexus_repos_npm_defaults:
   blob_store: "default"
   strict_content_validation: true
@@ -316,6 +317,8 @@ nexus_repos_npm_group: []
 # ===================================
 # NUGET
 # ===================================
+
+nexus_config_nuget: false
 
 _nexus_repos_nuget_defaults:
   blob_store: "default"
@@ -353,6 +356,8 @@ nexus_repos_nuget_group: []
 # YUM
 # ===================================
 
+nexus_config_yum: false
+
 _nexus_repos_yum_defaults:
   blob_store: "default"
   repodata_depth: 0  # from 0 to 5
@@ -389,6 +394,8 @@ nexus_repos_yum_group: []
 # ===================================
 # PYPI
 # ===================================
+
+nexus_config_pypi: false
 
 _nexus_repos_pypi_defaults:
   blob_store: "default"
@@ -428,6 +435,8 @@ nexus_repos_pypi_group: []
 # ===================================
 # HELM
 # ===================================
+
+nexus_config_helm: false
 
 _nexus_repos_helm_defaults:
   blob_store: "default"
